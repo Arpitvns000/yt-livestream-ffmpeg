@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Replace this with your actual Google Drive direct download link
+VIDEO_URL="https://drive.google.com/uc?id=1-tQODaM0rMTGuafHdvhUKRidPfAeqvHE&export=download"
+
+# Replace with your stream key
+STREAM_KEY="pxks-t44r-qk1t-bm6p-b1z5"
+
+# Start streaming
+ffmpeg -re -i "$VIDEO_URL" -vcodec libx264 -preset veryfast -maxrate 3000k -bufsize 6000k -pix_fmt yuv420p -g 50 -acodec aac -b:a 128k -ar 44100 -f flv "rtmp://a.rtmp.youtube.com/live2/$STREAM_KEY"
