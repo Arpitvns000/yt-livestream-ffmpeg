@@ -1,17 +1,11 @@
 FROM ubuntu:latest
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-  ffmpeg \
-  wget \
-  curl \
-  vim
+# Install FFmpeg
+RUN apt-get update && apt-get install -y ffmpeg curl
 
-# Copy stream start script (if needed)
-COPY start_stream.sh /usr/local/bin/start_stream.sh
+# Copy stream script
+COPY start_stream.sh /start_stream.sh
+RUN chmod +x /start_stream.sh
 
-# Make the script executable
-RUN chmod +x /usr/local/bin/start_stream.sh
-
-# Default command to run the script
-CMD ["/usr/local/bin/start_stream.sh"]
+# Run script
+CMD ["/start_stream.sh"]
