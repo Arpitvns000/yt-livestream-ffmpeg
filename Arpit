@@ -1,0 +1,14 @@
+# Use the official FFmpeg image
+FROM jrottenberg/ffmpeg:4.3-ubuntu
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the video or script (Google Drive video link, for example)
+COPY ./video /app/video
+
+# Install dependencies if needed
+RUN apt-get update && apt-get install -y wget curl
+
+# FFmpeg command to start the stream
+CMD ["ffmpeg", "-re", "-i", "https://drive.google.com/uc?export=download&id=1-tQODaM0rMTGuafHdvhUKRidPfAeqvHE", "-c:v", "libx264", "-preset", "veryfast", "-c:a", "aac", "-b:a", "192k", "-f", "flv", "rtmp://a.rtmp.youtube.com/live2/pxks-t44r-qk1t-bm6p-b1z5"]
