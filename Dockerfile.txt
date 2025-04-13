@@ -1,11 +1,8 @@
 FROM ubuntu:latest
 
-# Install FFmpeg
 RUN apt-get update && apt-get install -y ffmpeg curl
 
-# Copy stream script
 COPY start_stream.sh /start_stream.sh
 RUN chmod +x /start_stream.sh
 
-# Run script
 CMD ["/start_stream.sh"]
